@@ -53,7 +53,7 @@ import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
     function transfer(address to, uint256 value) external returns (bool){
         require(to != address(0), "Zero address!!!");
-        require(balances[msg.sender] > value, "Not anouth value!!!");
+        require(balances[msg.sender] >= value, "Not anouth value!!!");
         balances[msg.sender] -= value;
         balances[to] += value;
         emit Transfer(msg.sender, to, value);
@@ -73,7 +73,7 @@ import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
     function transferFrom(address _from, address to, uint256 value) external returns (bool) {
         require(to != address(0), "Zero address!!!");
-        require(balances[_from] > value, "Not anough value");
+        require(balances[_from] >= value, "Not anough value");
         require(allowances[_from][to] >= value, "check allowance!");
         allowances[_from][to] -= value; // error!
         balances[_from] -= value;
